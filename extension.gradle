@@ -1,0 +1,63 @@
+ext {
+
+    minSdkVersion = 21
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    appcompatVersion = '1.4.0'
+    androidxVersion = '1.2.0'
+    lifecycle_version = "2.2.0"
+    coroutines_version = '1.4.1'
+
+    //当需要时直接从这里引入到base的build.gradle中，Compiler类必须在App的gradle中引入
+    libs = [
+            Appcompat                    : "androidx.appcompat:appcompat:$appcompatVersion",        //原来的V7
+            SupportV4                    : "androidx.legacy:legacy-support-v4:$androidxVersion",
+            Recyclerview                 : "androidx.recyclerview:recyclerview:$androidxVersion",
+            CardView                     : "androidx.cardview:cardview:$androidxVersion",
+            Material                     : 'com.google.android.material:material:1.0.0-rc01',       //原来的support:design
+            ConstraintLayout             : 'androidx.constraintlayout:constraintlayout:2.0.4',
+            Corektx                      : 'androidx.core:core-ktx:1.0.2',
+            Coroutines                   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version",
+            CoroutinesAndroid            : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version",
+            LifeCycleViweModel           : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+            LifeCycleLiveData            : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version",
+            LifeCycleRuntime             : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+            // 可选 - 帮助实现Service的LifecycleOwner
+            LifeCycleService             : "androidx.lifecycle:lifecycle-service:$lifecycle_version",
+            // 可选 - ProcessLifecycleOwner给整个 app进程 提供一个lifecycle
+            LifeCycleProcess             : "androidx.lifecycle:lifecycle-process:$lifecycle_version",
+            Retrofit                     : 'com.squareup.retrofit2:retrofit:2.9.0',
+            RetrofitMoShi                : 'com.squareup.retrofit2:converter-moshi:2.9.0',                  //Moshi is a modern JSON library for Android and Java. It makes it easy to parse JSON into Java objects
+            RetrofitScalars              : 'com.squareup.retrofit2:converter-scalars:2.9.0',                //retrofit对String的支持
+            RetrofitGson                 : 'com.squareup.retrofit2:converter-gson:2.9.0',
+            OkHttp                       : 'com.squareup.okhttp3:okhttp:3.14.7',
+            OkHttpLogging                : 'com.squareup.okhttp3:logging-interceptor:3.14.7',               //OkHttp Log拦截器
+            Gson                         : 'com.google.code.gson:gson:2.8.6',
+            Toasty                       : 'com.github.GrenderG:Toasty:1.5.0',                              //Toast封装
+            Multidex                     : 'androidx.multidex:multidex:2.0.0',
+            ARouterApi                   : 'com.alibaba:arouter-api:1.5.1',                                 //ARouter
+            ARouterCompiler              : 'com.alibaba:arouter-compiler:1.5.1',
+            Glide                        : 'com.github.bumptech.glide:glide:4.12.0',
+            GlideCompiler                : 'com.github.bumptech.glide:compiler:4.12.0',                      //配置Glide全局属性
+            GlideTransformations         : 'jp.wasabeef:glide-transformations:4.3.0',                        //Glide图片裁剪、模糊 [If you want to use the GPU Filters 'jp.co.cyberagent.android:gpuimage:2.1.0' ]
+            SmartRefreshLayout           : 'com.scwang.smart:refresh-layout-kernel:2.0.3',
+            //各种特殊刷新header和Footer
+            SmartRefreshLayoutHeader     : 'com.scwang.smart:refresh-header-classics:2.0.3',    //经典刷新头
+            //'com.scwang.smart:refresh-header-radar:2.0.3'       //雷达刷新头
+            //'com.scwang.smart:refresh-header-falsify:2.0.3'     //虚拟刷新头
+            //'com.scwang.smart:refresh-header-material:2.0.3'    //谷歌刷新头
+            //'com.scwang.smart:refresh-header-two-level:2.0.3'   //二级刷新头
+            //'com.scwang.smart:refresh-footer-ball:2.0.3'        //球脉冲加载
+            //'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
+            BaseRecyclerViewAdapterHelper: 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4',
+            ConvenientBanner             : 'com.bigkoo:convenientbanner:2.1.5',                             //轮播图
+            GreenDao                     : 'org.greenrobot:greendao:3.3.0',                                  //GreenDao数据库
+            //classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0' // add plugin
+            //apply plugin: 'org.greenrobot.greendao' // apply plugin
+            //FreeProGuard         : 'com.blankj:free-proguard:1.0.2',                                //包含市面上比较主流的库的混淆配置
+            AndroidAutoSize              : 'me.jessyan:autosize:1.2.1',      //头条的适配方案
+            SmartSwipe                   : 'com.billy.android:smart-swipe:1.1.2',    //关于侧滑的库，包括退出（动画），删除item
+            //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+            LeakCanary                   : 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+    ]
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="server_exception">服务器异常，请稍后再试〜</string>
+    <string name="network_error_exception">网络异常，请检查网络</string>
+</resources>
