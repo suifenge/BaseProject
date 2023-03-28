@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'maven-publish'
+    id 'signing'
 }
 
 android {
@@ -39,15 +40,65 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                groupId 'com.suifeng.sdk'
-                artifactId 'utils'
-                version '0.0.1'
+// add publish script
+publishing {
+    publications {
+        release(MavenPublication) {
+            pom {
+                name = 'Utils'
+                description = 'a utils libary for develop android'
+                url = 'https://github.com/suifenge/BaseProject'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'suifengeee'
+                        name = 'suifengeee'
+                        email = 'suifengeee@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'https://github.com/suifenge/BaseProject.git'
+                    developerConnection = 'https://github.com/suifenge/BaseProject.git'
+                    url = 'https://github.com/suifenge/BaseProject'
+                }
+            }
+
+            groupId "io.github.suifenge"
+            artifactId "utils"
+            version "0.0.1"
+
+            afterEvaluate {
                 from components.release
             }
         }
     }
+    repositories {
+        maven {
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+// signing, this need key, secret, we put it into gradle.properties
+signing {
+    sign publishing.publications.release
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+
+    exclude "**/R.class"  //排除`R.class`
+    exclude "**/BuildConfig.class"  //排除`BuildConfig.class`
 }
