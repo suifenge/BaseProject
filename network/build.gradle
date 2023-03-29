@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'maven-publish'
+    id 'signing'
 }
 
 android {
@@ -44,23 +45,65 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.7'
     //gson
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.8.9'
     //协程
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation project(':utils')
+    implementation 'io.github.suifenge:utils:0.0.1'
 
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                groupId 'com.suifeng.sdk'
-                artifactId 'network'
-                version '0.0.1'
+publishing {
+    publications {
+        release(MavenPublication) {
+            pom {
+                name = 'Network'
+                description = 'a network libary for develop android'
+                url = 'https://github.com/suifenge/BaseProject'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'suifengeee'
+                        name = 'suifengeee'
+                        email = 'suifengeee@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'https://github.com/suifenge/BaseProject.git'
+                    developerConnection = 'https://github.com/suifenge/BaseProject.git'
+                    url = 'https://github.com/suifenge/BaseProject'
+                }
+            }
+
+            groupId "io.github.suifenge"
+            artifactId "network"
+            version "0.0.1"
+
+            afterEvaluate {
                 from components.release
             }
         }
     }
+    repositories {
+        maven {
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+// signing, this need key, secret, we put it into gradle.properties
+signing {
+    sign publishing.publications.release
 }

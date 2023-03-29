@@ -3,25 +3,19 @@ package com.suifeng.sdk.base.ui
 import android.os.Bundle
 import androidx.annotation.Keep
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.suifeng.sdk.base.R
-import com.suifeng.sdk.base.vm.BaseViewModel
 
 /**
  * @author ljc
  * @data 2018/6/19
  * @describe
  */
-abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
-    //自定义布局的id
-    private val layoutResId: Int
-) : AppCompatActivity() {
+abstract class BaseActivity<V : ViewBinding>: AppCompatActivity() {
 
-    protected lateinit var binding: V
-
-    protected lateinit var viewModel: VM
+    protected val mBinding: V by lazy {
+        initViewBinding()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (toggleOverridePendingTransition()) {
@@ -52,32 +46,12 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
         beforeSuperCreate(savedInstanceState)
         super.onCreate(savedInstanceState)
         AppManager.get().addActivity(this)
-        initViewDataBinding()
-        viewModel = getViewModelInstance(aspectViewModelClass())
+        setContentView(mBinding.root)
         //初始化Activity
         init(savedInstanceState)
     }
 
-    /**
-     * 当前ViewModel的Class
-     */
-    abstract fun aspectViewModelClass(): Class<VM>
-
-    /**
-     * 获取ViewModel实例
-     */
-    private fun getViewModelInstance(action: Class<VM>): VM {
-        return ViewModelProvider(this)[action]
-    }
-
-    /**
-     * 注入绑定
-     */
-    private fun initViewDataBinding() {
-        //DataBindingUtil类需要在project的build中配置 dataBinding {enabled true }, 同步后会自动关联android.databinding包
-        binding = DataBindingUtil.setContentView(this, layoutResId)
-        binding.lifecycleOwner = this //绑定LiveData并对Binding设置LifecycleOwner
-    }
+    abstract fun initViewBinding(): V
 
     open fun beforeSuperCreate(savedInstanceState: Bundle?) {}
 
@@ -111,11 +85,6 @@ abstract class BaseActivity<V : ViewDataBinding, VM : BaseViewModel>(
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.unbind()
     }
 
     open fun toggleOverridePendingTransition(): Boolean {

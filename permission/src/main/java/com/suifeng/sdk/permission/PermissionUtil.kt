@@ -29,7 +29,7 @@ class PermissionUtil {
     }
 }
 
-fun hasPermission(@Size(min = 1) @NonNull vararg permissions: String): Boolean {
+fun hasPermission(@Size(min = 1) vararg permissions: String): Boolean {
     permissions.forEach {
         // WRITE_SETTING 处理
         if (it == android.Manifest.permission.WRITE_SETTINGS &&

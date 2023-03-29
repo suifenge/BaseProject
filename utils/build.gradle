@@ -12,7 +12,7 @@ android {
         minSdk 21
         targetSdk 33
         versionCode 1
-        versionName "0.0.1"
+        versionName "0.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'com.tencent:mmkv:1.2.14'
 }
 
 // add publish script
@@ -73,7 +75,7 @@ publishing {
 
             groupId "io.github.suifenge"
             artifactId "utils"
-            version "0.0.1"
+            version "0.0.2"
 
             afterEvaluate {
                 from components.release

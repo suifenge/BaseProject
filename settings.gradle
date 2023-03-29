@@ -10,6 +10,6 @@ rootProject.name = "BaseProjectDemo"
 include ':app'
 include ':utils'
 include ':dialog'
-//include ':permission'
+include ':permission'
 include ':network'
-//include ':base'
+include ':base'

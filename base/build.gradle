@@ -3,14 +3,16 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
+    id 'maven-publish'
+    id 'signing'
 }
 
 android {
-    compileSdk 29
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 29
+        targetSdk 33
         versionCode 1
         versionName "0.0.1"
 
@@ -33,16 +35,69 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
+        viewBinding = true
     }
 }
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
-//    implementation project(':utils')
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    api 'androidx.activity:activity-ktx:1.5.1'
+    api 'androidx.fragment:fragment-ktx:1.5.1'
+    implementation 'io.github.suifenge:utils:0.0.1'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            pom {
+                name = 'Base'
+                description = 'a base libary for develop android'
+                url = 'https://github.com/suifenge/BaseProject'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'suifengeee'
+                        name = 'suifengeee'
+                        email = 'suifengeee@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'https://github.com/suifenge/BaseProject.git'
+                    developerConnection = 'https://github.com/suifenge/BaseProject.git'
+                    url = 'https://github.com/suifenge/BaseProject'
+                }
+            }
+
+            groupId "io.github.suifenge"
+            artifactId "base"
+            version "0.0.1"
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+    repositories {
+        maven {
+            url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.release
 }
