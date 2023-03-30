@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.suifeng.demo.baseproject.databinding.ActivityMainBinding
 import com.suifeng.sdk.base.ui.BaseActivity
+import com.suifeng.sdk.permission.PermissionUtil
+import com.suifeng.sdk.utils.Utils
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -19,6 +21,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
+        PermissionUtil.init(this.application)
+        Utils.init(this.application)
     }
+
 }

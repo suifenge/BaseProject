@@ -9,7 +9,8 @@ import kotlinx.android.parcel.Parcelize
 data class PermissionData(
     val permission: String,
     val explain: String,
-    var desc: PermissionDesc? = null
+    var desc: PermissionDesc? = null,
+    var alwaysShow: Boolean = true  //控制权限弹框说明不会一直提示用户
 ) : Parcelable
 
 @Keep

@@ -12,8 +12,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "0.0.1"
+        versionCode 2
+        versionName "0.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,8 +37,7 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'io.github.suifenge:utils:0.0.1'
-    implementation 'io.github.suifenge:dialog:0.0.1'
+    implementation 'io.github.suifenge:utils:0.0.2'
 }
 
 publishing {
@@ -73,7 +72,7 @@ publishing {
 
             groupId "io.github.suifenge"
             artifactId "permission"
-            version "0.0.1"
+            version "0.0.2"
 
             afterEvaluate {
                 from components.release

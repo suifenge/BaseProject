@@ -7,7 +7,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.suifeng.sdk.dialog.HintDialog
 import com.suifeng.sdk.permission.PermissionCallback
 import com.suifeng.sdk.permission.PermissionConstant.APP_SETTING_RC
 import com.suifeng.sdk.permission.PermissionData
@@ -68,7 +67,7 @@ internal class PermissionFragment : Fragment(), ActivityResultCallback<Map<Strin
                 handleNextPermission()
             } else {
                 //是否需要展示说明申请用途弹窗
-                if (permissionData.desc != null) {
+                if (permissionData.desc != null && permissionData.alwaysShow) {
                     //弹出说明对话框
                     showPermissionDescriptionDialog(permissionData)
                 } else {

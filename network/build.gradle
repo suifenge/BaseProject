@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "0.0.1"
+        versionCode 2
+        versionName "0.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -43,13 +43,13 @@ dependencies {
     }
     //okhttp
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.7'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
     //gson
     implementation 'com.google.code.gson:gson:2.8.9'
     //协程
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'io.github.suifenge:utils:0.0.1'
+    implementation 'io.github.suifenge:utils:0.0.2'
 
 }
 
@@ -85,7 +85,7 @@ publishing {
 
             groupId "io.github.suifenge"
             artifactId "network"
-            version "0.0.1"
+            version "0.0.2"
 
             afterEvaluate {
                 from components.release

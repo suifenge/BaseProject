@@ -23,9 +23,11 @@ class RetrofitClient {
         fun <T> createRetrofit(builder: Builder<T>, cls: Class<T>): T {
             // 构建 log
             val loggingInterceptor = if (builder.debug) {
-                HttpLoggingInterceptor {
-                    LogUtil.d(it)
-                }
+                HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger {
+                    override fun log(message: String) {
+                        LogUtil.d(message)
+                    }
+                })
             } else {
                 null
             }
