@@ -17,10 +17,14 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitClient {
     companion object {
+
+        private const val LOG_TAG = "RetrofitClient"
+
         /**
          * 初始化创建Retrofit 对象
          */
         fun <T> createRetrofit(builder: Builder<T>, cls: Class<T>): T {
+            LogUtil.init(LOG_TAG, builder.debug)
             // 构建 log
             val loggingInterceptor = if (builder.debug) {
                 HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger {
