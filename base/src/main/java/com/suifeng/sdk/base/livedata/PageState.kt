@@ -8,15 +8,14 @@ import androidx.annotation.Keep
 @Keep
 sealed class PageState {
 
-    @Keep
-    class Loading() : PageState()
+    var mCode: String = ""
+    var mMessage: String = ""
 
-    @Keep
-    class Empty() : PageState()
+    object Loading : PageState()
 
-    @Keep
-    class Content() : PageState()
+    object Empty : PageState()
 
-    @Keep
-    class Error() : PageState()
+    object Content : PageState()
+
+    object Error : PageState()
 }
