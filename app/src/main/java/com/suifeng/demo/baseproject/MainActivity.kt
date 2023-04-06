@@ -31,8 +31,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             })
         }
 
-        mBinding.changeStateBtn
-
         mBinding.changeStateBtn.setOnClickListener {
             val index = nextInt(4)
             viewModel.loadData(index)
