@@ -3,6 +3,7 @@ package com.suifeng.sdk.network.retrofit
 import com.suifeng.sdk.network.interceptor.HeaderInterceptor
 import com.suifeng.sdk.network.ssl.CustomX509TrustManager
 import com.suifeng.sdk.utils.log.LogUtil
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -52,6 +53,9 @@ class RetrofitClient {
                 level = HttpLoggingInterceptor.Level.BODY
                 okHttpBuilder.addInterceptor(this)
             }
+            builder.interceptor?.apply {
+                okHttpBuilder.addInterceptor(this)
+            }
             // 构建
             return Retrofit.Builder()
                     //增加返回值为String的支持
@@ -81,7 +85,9 @@ class RetrofitClient {
         // 超时链接 - 默认6秒
         val connectionTimeout: Long = 15,
         // 头部
-        val headers: () -> HashMap<String, String>
+        val headers: () -> HashMap<String, String>,
+        //业务拦截器
+        val interceptor: Interceptor? = null
     ) {
 
         fun create() = createRetrofit(this, cls)
