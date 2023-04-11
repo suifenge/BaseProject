@@ -1,13 +1,15 @@
 package com.suifeng.sdk.network.ssl
 
+import android.annotation.SuppressLint
 import com.suifeng.sdk.utils.log.LogUtil
+import java.security.KeyStore
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
-import java.util.ArrayList
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
+@SuppressLint("CustomX509TrustManager")
 class CustomX509TrustManager : X509TrustManager {
 
     private val trustManagers: ArrayList<X509TrustManager> = ArrayList()
@@ -53,6 +55,7 @@ class CustomX509TrustManager : X509TrustManager {
         try {
             val tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm()
             val tmf = TrustManagerFactory.getInstance(tmfAlgorithm)
+            tmf.init(null as KeyStore?)
             trustManagers.add(tmf.trustManagers[0] as X509TrustManager)
         } catch (e: Exception) {
             LogUtil.d(e)
@@ -60,7 +63,7 @@ class CustomX509TrustManager : X509TrustManager {
     }
 
     fun getSSLContext(): SSLContext {
-        val sslContext = SSLContext.getInstance("TLS")
+        val sslContext = SSLContext.getInstance("SSL")
         val array = arrayOfNulls<X509TrustManager>(trustManagers.size)
         trustManagers.toArray(array)
         sslContext.init(null, array, null)

@@ -44,6 +44,14 @@ fun View.singleClick(
     }
 }
 
+fun View.click(
+    listener: (View) -> Unit
+) {
+    setOnClickListener {
+        listener.invoke(it)
+    }
+}
+
 private fun getActivity(view: View): Activity? {
     var context = view.context
     while(context is ContextWrapper) {
