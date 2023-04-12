@@ -1,6 +1,7 @@
 package com.suifeng.sdk.base.loading
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ class LoadView @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
 
     init {
         this.visibility = View.GONE //默认隐藏
+        this.isClickable = true
         try {
             attrs?.let {
                 val typeArray = context.obtainStyledAttributes(it, R.styleable.LoadView)
