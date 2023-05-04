@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         Utils.init(this.application)
-
+        viewModel.getInfo()
         mBinding.loadView.apply {
             observerViewModel(this@MainActivity, viewModel)
             setOnLoadStateChangeListener(object: ILoadStateListener {
