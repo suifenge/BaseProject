@@ -1,6 +1,7 @@
 package com.suifeng.sdk.network.retrofit
 
 import com.suifeng.sdk.network.interceptor.HeaderInterceptor
+import com.suifeng.sdk.network.log.HttpLogger
 import com.suifeng.sdk.network.ssl.CustomX509TrustManager
 import com.suifeng.sdk.utils.log.LogUtil
 import okhttp3.Interceptor
@@ -28,11 +29,8 @@ class RetrofitClient {
             LogUtil.init(LOG_TAG, builder.debug)
             // 构建 log
             val loggingInterceptor = if (builder.debug) {
-                HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger {
-                    override fun log(message: String) {
-                        LogUtil.d(message)
-                    }
-                })
+                HttpLoggingInterceptor(HttpLogger())
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
             } else {
                 null
             }
