@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-        versionCode 7
-        versionName "0.0.7"
+        versionCode 8
+        versionName "0.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -85,7 +85,7 @@ publishing {
 
             groupId "io.github.suifenge"
             artifactId "network"
-            version "0.0.7"
+            version "0.0.8"
 
             afterEvaluate {
                 from components.release

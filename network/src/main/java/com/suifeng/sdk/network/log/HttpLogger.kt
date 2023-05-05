@@ -1,5 +1,6 @@
 package com.suifeng.sdk.network.log
 
+import android.util.Log
 import com.suifeng.sdk.utils.log.LogUtil
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -19,7 +20,15 @@ class HttpLogger: HttpLoggingInterceptor.Logger {
         }
         mMessage.append(mMsg+"\n")
         if(mMsg.startsWith("<-- END HTTP")) {
-            LogUtil.d(mMessage.toString())
+            safeLog(mMessage.toString())
+        }
+    }
+
+    private fun safeLog(message: String) {
+        try {
+            LogUtil.d(message)
+        } catch (e: Exception) {
+            Log.d("HttpLogger", message)
         }
     }
 }
