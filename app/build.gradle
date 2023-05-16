@@ -46,7 +46,6 @@ dependencies {
 //    implementation 'io.github.suifenge:base:0.0.1'
     implementation 'io.github.suifenge:utils:0.0.5'
     implementation project(':base')
-    implementation project(':network')
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
