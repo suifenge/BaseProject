@@ -4,16 +4,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.suifeng.sdk.permission.R
+import com.suifeng.sdk.utils.display.dpToPx
 
 
 /**
@@ -58,7 +56,7 @@ class HintDialog : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        setDialogAttr(dialog?.window)
         mInflate = inflater.inflate(R.layout.layout_dialog_hint, container, true)!!
         // 初始化View
         mInflate.findViewById<TextView>(R.id.dialog_tv_title).text = requireArguments().getString("title")
@@ -82,6 +80,18 @@ class HintDialog : DialogFragment() {
             negativeListener(it)
         }
         return mInflate
+    }
+
+    private fun setDialogAttr(window: Window?) {
+        window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            decorView.setPadding(dpToPx(40), 0, dpToPx(40), 0)
+            val params = attributes
+            params.gravity = Gravity.CENTER
+            params.width = WindowManager.LayoutParams.MATCH_PARENT
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT
+            attributes = params
+        }
     }
 
     /**

@@ -67,7 +67,7 @@ internal class PermissionFragment : Fragment(), ActivityResultCallback<Map<Strin
                 handleNextPermission()
             } else {
                 //是否需要展示说明申请用途弹窗
-                if (permissionData.desc != null && permissionData.alwaysShow) {
+                if (permissionData.desc != null) {
                     //弹出说明对话框
                     showPermissionDescriptionDialog(permissionData)
                 } else {
@@ -90,7 +90,7 @@ internal class PermissionFragment : Fragment(), ActivityResultCallback<Map<Strin
                 return it
             }
         }
-        return PermissionData(permission, "")
+        return PermissionData(permission, null)
     }
 
     private fun showPermissionDescriptionDialog(permissionData: PermissionData) {
@@ -98,6 +98,7 @@ internal class PermissionFragment : Fragment(), ActivityResultCallback<Map<Strin
         desc?.let {
             HintDialog.newInstance(
                 it.content, it.title,
+                sureText = it.buttonText ?: "确定",
                 cancelText = null
             ).show(this, {
                 requestPermissionLauncher.launch(arrayOf(permissionData.permission))

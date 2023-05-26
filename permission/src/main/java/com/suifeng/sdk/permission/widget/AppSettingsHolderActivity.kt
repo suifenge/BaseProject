@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import com.suifeng.sdk.permission.AlwaysDeniedDesc
 import com.suifeng.sdk.permission.PermissionConstant.APP_SETTING_RC
 import com.suifeng.sdk.permission.PermissionConstant.PERMISSION_GPS_OPEN
 import com.suifeng.sdk.permission.PermissionConstant.PERMISSION_SYSTEM_NOTIFICATION
@@ -20,9 +21,13 @@ class AppSettingsHolderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val permission = intent.getStringExtra(PERMISSION)
-        val reason = intent.getStringExtra(REASON)
+        val reason = intent.getParcelableExtra<AlwaysDeniedDesc>(REASON)
+        if(reason == null) {
+            finish()
+            return
+        }
         dialogFragment = AppSettingsDialog(
-            message = reason ?: "",
+            desc = reason,
             positive = {
                 try {
                     jumpToSetting(permission ?: "")
@@ -94,7 +99,7 @@ class AppSettingsHolderActivity : AppCompatActivity() {
         fun createIntent(
             context: Context,
             permission: String,
-            reason: String
+            reason: AlwaysDeniedDesc?
         ): Intent {
             return Intent(context, AppSettingsHolderActivity::class.java).apply {
                 putExtra(PERMISSION, permission)
