@@ -28,8 +28,8 @@ fun View.visible() {
  * @param isShareSingleClick 是否页面中的所有点击控件都共享一个点击时间，true:共享 false:控件独享
  */
 fun View.singleClick(
-    interval: Long = 1500,
-    isShareSingleClick: Boolean = true,
+    interval: Long = 1000,
+    isShareSingleClick: Boolean = false,
     listener: (View) -> Unit
 ) {
     setOnClickListener {

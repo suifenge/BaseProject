@@ -29,13 +29,6 @@ fun String.isDouble(): Boolean {
     return m.matches()
 }
 
-/** 是否为手机号码 */
-fun String.isMobile(): Boolean {
-    val p = Pattern.compile("^[1][3,4,5,7,8,9][0-9]{9}$") // 验证手机号
-    val m = p.matcher(this)
-    return m.matches()
-}
-
 /**
  * 为身份张格式
  */
@@ -46,7 +39,7 @@ fun String.isIDCard(): Boolean {
 /**
  * 非身份张格式
  */
-public inline fun String.isNotIDCard(): Boolean {
+fun String.isNotIDCard(): Boolean {
     val validate = IDCardFormat.IDCardValidate(this)
     return !isEmpty(validate)
 }
