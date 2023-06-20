@@ -26,7 +26,6 @@ class RetrofitClient {
          * 初始化创建Retrofit 对象
          */
         fun <T> createRetrofit(builder: Builder<T>, cls: Class<T>): T {
-            LogUtil.init(LOG_TAG, builder.debug)
             // 构建 log
             val loggingInterceptor = if (builder.debug) {
                 HttpLoggingInterceptor(HttpLogger())
@@ -65,6 +64,13 @@ class RetrofitClient {
                     .baseUrl(builder.baseUrl)
                     .build()
                     .create(cls)
+        }
+
+        /**
+         * 如果外部不使用LogUtil打印日志时需要手动初始化下网络库里面的日志打印
+         */
+        fun initLog(tag: String? = null) {
+            LogUtil.init(tag ?: LOG_TAG, true)
         }
     }
 
